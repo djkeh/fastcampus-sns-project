@@ -28,3 +28,5 @@
 
 * 프로젝트 강의 참고용 저장소: https://github.com/KimHyoJin/sns
 * 질문 및 제안: https://github.com/djkeh/fastcampus-sns-project/discussions
+
+수정완료
