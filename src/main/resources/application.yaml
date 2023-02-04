@@ -5,8 +5,7 @@ spring.jpa:
   properties.hibernate.format_sql: true
   show-sql: true
 
-spring:
-  datasource:
+spring.datasource:
     hikari.maxium-pool-size: 4
     url: jdbc:postgresql://ec2-54-163-140-5.compute-1.amazonaws.com/de3cestlqkekp0
     username: u7bjqnltofpp1p
@@ -18,3 +17,25 @@ jwt:
   secret-key: fast_campus.sns-application-2022.secre_key
   token:
     expired-time-ms: 2592000000
+
+spring.kafka:
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: SCRAM-SHA-256
+      sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="tbokvffz" password="gbS9_rezAH822V2L7fuadFQ4bcUefJjz";
+    consumer:
+      properties.spring.json.trusted.packages: "*"
+      bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+      group-id: alarm
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      ack-mode: MANUAL
+    producer:
+      bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties.enable.idempotence: false
+    topic:
+      alarm: tbokvffz-alarm-10069
