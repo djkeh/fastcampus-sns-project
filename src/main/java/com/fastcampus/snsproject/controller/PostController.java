@@ -1,9 +1,9 @@
-package com.fastcampus.snsproject.contoller;
+package com.fastcampus.snsproject.controller;
 
-import com.fastcampus.snsproject.contoller.request.PostCreateRequest;
-import com.fastcampus.snsproject.contoller.request.PostModifyRequest;
-import com.fastcampus.snsproject.contoller.response.PostResponse;
-import com.fastcampus.snsproject.contoller.response.Response;
+import com.fastcampus.snsproject.controller.request.PostCreateRequest;
+import com.fastcampus.snsproject.controller.request.PostModifyRequest;
+import com.fastcampus.snsproject.controller.response.PostResponse;
+import com.fastcampus.snsproject.controller.response.Response;
 import com.fastcampus.snsproject.model.Post;
 import com.fastcampus.snsproject.service.PostService;
 import lombok.RequiredArgsConstructor;

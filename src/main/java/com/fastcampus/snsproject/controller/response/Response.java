@@ -1,4 +1,4 @@
-package com.fastcampus.snsproject.contoller.response;
+package com.fastcampus.snsproject.controller.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

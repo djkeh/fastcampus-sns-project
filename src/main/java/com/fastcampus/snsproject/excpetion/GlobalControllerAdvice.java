@@ -1,6 +1,6 @@
 package com.fastcampus.snsproject.excpetion;
 
-import com.fastcampus.snsproject.contoller.response.Response;
+import com.fastcampus.snsproject.controller.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

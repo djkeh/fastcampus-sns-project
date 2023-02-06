@@ -1,7 +1,7 @@
 package com.fastcampus.snsproject.controller;
 
-import com.fastcampus.snsproject.contoller.request.UserJoinRequest;
-import com.fastcampus.snsproject.contoller.request.UserLoginRequest;
+import com.fastcampus.snsproject.controller.request.UserJoinRequest;
+import com.fastcampus.snsproject.controller.request.UserLoginRequest;
 import com.fastcampus.snsproject.excpetion.ErrorCode;
 import com.fastcampus.snsproject.excpetion.SnsApplicationException;
 import com.fastcampus.snsproject.model.User;
