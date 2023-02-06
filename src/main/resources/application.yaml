@@ -26,7 +26,7 @@ spring.kafka:
     consumer:
       properties.spring.json.trusted.packages: "*"
       bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
-      group-id: alarm
+      group-id: tbokvffz-alarm-10069
       auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
