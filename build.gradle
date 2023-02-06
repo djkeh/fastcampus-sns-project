@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.7'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "com.github.node-gradle.node" version "3.3.0"
 }
 
 group = 'com.fastcampus'
@@ -14,9 +15,45 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.security:spring-security-test'
+    runtimeOnly 'com.h2database:h2'
+    //runtimeOnly 'org.postgresql:postgresql' // 강의 제공 x
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+node {
+    nodeModulesDir = file("$projectDir/front-end")
+    version = '18.3.0'
+    download = true
+}
+
+task npmBuild(type: NpmTask) {
+    args = ['run', "build"]
+}
+
+task copyFrontEnd(type: Copy) {
+    from "$projectDir/front-end/static"
+    into 'build/resources/main/static/.'
+}
+
+task cleanFrontEnd(type: Delete) {
+    delete "$projectDir/front-end/static", "$projectDir/front-end/node_modules"
+}
+
+// Front End도 같이 작동하도록
+npmBuild.dependsOn npmInstall
+copyFrontEnd.dependsOn npmBuild
+compileJava.dependsOn copyFrontEnd
+
+clean.dependsOn cleanFrontEnd

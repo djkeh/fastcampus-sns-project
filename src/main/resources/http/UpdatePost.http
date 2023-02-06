@@ -1,0 +1,10 @@
+PUT /api/v1/posts/1 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuIiwiaWF0IjoxNjc1NDExNjk0LCJleHAiOjE2NzgwMDM2OTR9.F5aeE8VlFw6gYZYk3lwyIS4tR2C6WJCpdAyKrhU6A3U
+Content-Length: 60
+
+{
+  "title" : "modify",
+  "body" : "modified body2"
+}

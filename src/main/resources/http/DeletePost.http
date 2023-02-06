@@ -1,0 +1,9 @@
+DELETE /api/v1/posts/1 HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuIiwiaWF0IjoxNjc1NDYzOTYwLCJleHAiOjE2NzgwNTU5NjB9.TlB-ESziMW0DrjTZqRZVXa6ZTGdbtPzsPgA7_pg4wCM
+Content-Length: 10
+
+{
+
+}
