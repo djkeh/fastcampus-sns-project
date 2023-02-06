@@ -1,7 +1,7 @@
 POST /api/v1/posts HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuIiwiaWF0IjoxNjc1NTU1NDY2LCJleHAiOjE2NzgxNDc0NjZ9.f077B5Bubuoo1JTItDAUfSzfmxdo-xYhi3Ov1pgAOzE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuIiwiaWF0IjoxNjc1Njg2NjYyLCJleHAiOjE2NzgyNzg2NjJ9.lXocGQ36fSpS4fLygnnbHFpnk9VjbVvl4AaR9TyLIhQ
 Content-Length: 57
 
 {
