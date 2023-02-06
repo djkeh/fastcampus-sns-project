@@ -7,6 +7,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
 #  datasource:
 #    hikari:
 #      maximum-pool-size: 4
