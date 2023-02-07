@@ -1,4 +1,4 @@
-package com.fastcampus.sns;
+package com.fast.campus.simplesns;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

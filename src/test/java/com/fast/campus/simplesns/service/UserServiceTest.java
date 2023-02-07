@@ -4,9 +4,6 @@ import com.fast.campus.simplesns.exception.ErrorCode;
 import com.fast.campus.simplesns.exception.SimpleSnsApplicationException;
 import com.fast.campus.simplesns.fixture.TestInfoFixture;
 import com.fast.campus.simplesns.fixture.UserEntityFixture;
-import com.fast.campus.simplesns.model.User;
-import com.fast.campus.simplesns.model.UserRole;
-import com.fast.campus.simplesns.model.entity.UserEntity;
 import com.fast.campus.simplesns.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,8 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;

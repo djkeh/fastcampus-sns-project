@@ -6,7 +6,6 @@ import com.fast.campus.simplesns.model.Alarm;
 import com.fast.campus.simplesns.model.User;
 import com.fast.campus.simplesns.model.entity.UserEntity;
 import com.fast.campus.simplesns.repository.AlarmEntityRepository;
-import com.fast.campus.simplesns.repository.EmitterRepository;
 import com.fast.campus.simplesns.repository.UserEntityRepository;
 import com.fast.campus.simplesns.repository.UserCacheRepository;
 import com.fast.campus.simplesns.utils.JwtTokenUtils;
@@ -19,8 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
-import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor

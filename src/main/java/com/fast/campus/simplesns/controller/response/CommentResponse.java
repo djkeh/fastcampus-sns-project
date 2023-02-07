@@ -1,7 +1,6 @@
 package com.fast.campus.simplesns.controller.response;
 
 import com.fast.campus.simplesns.model.Comment;
-import com.fast.campus.simplesns.model.entity.CommentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

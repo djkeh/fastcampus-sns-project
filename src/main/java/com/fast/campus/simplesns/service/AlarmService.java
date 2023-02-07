@@ -3,7 +3,6 @@ package com.fast.campus.simplesns.service;
 import com.fast.campus.simplesns.exception.ErrorCode;
 import com.fast.campus.simplesns.exception.SimpleSnsApplicationException;
 import com.fast.campus.simplesns.model.AlarmArgs;
-import com.fast.campus.simplesns.model.AlarmEvent;
 import com.fast.campus.simplesns.model.AlarmNoti;
 import com.fast.campus.simplesns.model.AlarmType;
 import com.fast.campus.simplesns.model.entity.AlarmEntity;

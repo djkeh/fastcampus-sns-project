@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
