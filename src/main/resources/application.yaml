@@ -1,8 +1,8 @@
 spring.datasource:
   hikari.maximum-pool-size: 4
-  url: jdbc:postgresql://ec2-52-86-115-245.compute-1.amazonaws.com/d2p70ft1bv6u4c
-  username: sohthnduwbipay
-  password: 62971a3ff89fb0c590e0253d6871ba2256d678d39233dfd9f41a91eff1ea0246
+  url: jdbc:postgresql://ec2-54-163-140-5.compute-1.amazonaws.com:5432/de3cestlqkekp0
+  username: u7bjqnltofpp1p
+  password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
 #  platform: postgres
   driver-class-name: org.postgresql.Driver
 
@@ -29,7 +29,7 @@ spring:
       sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="r2rj2fh0" password="e_BnIr6ESAbpmuu7L7XugsMNmYlx3eFq";
     consumer:
 #      properties.spring.json.trusted.packages: "*"
-      bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+      bootstrap-servers: dory.srvs.cloudkafka.com:9094
       group-id: notification
       auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
@@ -37,7 +37,7 @@ spring:
     listener:
       ack-mode: MANUAL
     producer:
-      bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+      bootstrap-servers: dory.srvs.cloudkafka.com:9094
       key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 #      properties.enable.idempotence: false
