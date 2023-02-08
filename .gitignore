@@ -226,5 +226,3 @@ gradle-app.setting
 
 **/front-end/node_modules/**
 **/front-end/static/**
-
-*.http
