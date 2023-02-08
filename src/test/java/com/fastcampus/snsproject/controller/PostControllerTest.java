@@ -302,7 +302,7 @@ public class PostControllerTest {
     void 댓글작성_게시물이_없는경우() throws Exception{
 
         //mocking
-        doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).comment(any(), any());
+        doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).comment(any(), any(), any());
         mockMvc.perform(post("/api/v1/posts/1/comments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment")))
