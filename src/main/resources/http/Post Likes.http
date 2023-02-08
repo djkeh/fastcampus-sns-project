@@ -1,0 +1,9 @@
+POST /api/v1/posts/1/likes HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuIiwiaWF0IjoxNjc1Njg2NjYyLCJleHAiOjE2NzgyNzg2NjJ9.lXocGQ36fSpS4fLygnnbHFpnk9VjbVvl4AaR9TyLIhQ
+Content-Length: 10
+
+{
+
+}

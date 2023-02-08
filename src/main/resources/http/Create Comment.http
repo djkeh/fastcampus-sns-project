@@ -1,0 +1,9 @@
+POST /api/v1/posts/1/comments HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuIiwiaWF0IjoxNjc1ODUyMTE2LCJleHAiOjE2Nzg0NDQxMTZ9.vydrU_8BVI8fiFR0VtPCckigkl08Lcs4Ki-v4cGh0EI
+Content-Length: 57
+
+{
+  "comment" : "donghyunlee Comment"
+}
