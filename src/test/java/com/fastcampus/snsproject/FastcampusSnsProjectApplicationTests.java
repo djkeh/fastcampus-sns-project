@@ -1,13 +1,13 @@
-package com.fastcampus.snsproject;
+package com.fastcampus.sns;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FastcampusSnsProjectApplicationTests {
+class SnsApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
