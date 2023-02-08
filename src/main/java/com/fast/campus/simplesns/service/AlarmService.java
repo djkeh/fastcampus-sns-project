@@ -1,7 +1,7 @@
 package com.fast.campus.simplesns.service;
 
 import com.fast.campus.simplesns.exception.ErrorCode;
-import com.fast.campus.simplesns.exception.SimpleSnsApplicationException;
+import com.fast.campus.simplesns.exception.SnsApplicationException;
 import com.fast.campus.simplesns.model.AlarmArgs;
 import com.fast.campus.simplesns.model.AlarmNoti;
 import com.fast.campus.simplesns.model.AlarmType;
@@ -30,7 +30,7 @@ public class AlarmService {
     private static final Long DEFAULT_TIMEOUT = 60L * 1000 * 60;
 
     public void send(AlarmType type, AlarmArgs args, Integer receiverId) {
-        UserEntity userEntity = userEntityRepository.findById(receiverId).orElseThrow(() -> new SimpleSnsApplicationException(ErrorCode.USER_NOT_FOUND));
+        UserEntity userEntity = userEntityRepository.findById(receiverId).orElseThrow(() -> new SnsApplicationException(ErrorCode.USER_NOT_FOUND));
         AlarmEntity entity = AlarmEntity.of(type, args, userEntity);
         alarmEntityRepository.save(entity);
         emitterRepository.get(receiverId).ifPresentOrElse(it -> {
@@ -41,7 +41,7 @@ public class AlarmService {
                                 .data(new AlarmNoti()));
                     } catch (IOException exception) {
                         emitterRepository.delete(receiverId);
-                        throw new SimpleSnsApplicationException(ErrorCode.NOTIFICATION_CONNECT_ERROR);
+                        throw new SnsApplicationException(ErrorCode.NOTIFICATION_CONNECT_ERROR);
                     }
                 },
                 () -> log.info("No emitter founded")
@@ -62,7 +62,7 @@ public class AlarmService {
                     .name(ALARM_NAME)
                     .data("connect completed"));
         } catch (IOException exception) {
-            throw new SimpleSnsApplicationException(ErrorCode.NOTIFICATION_CONNECT_ERROR);
+            throw new SnsApplicationException(ErrorCode.NOTIFICATION_CONNECT_ERROR);
         }
         return emitter;
     }

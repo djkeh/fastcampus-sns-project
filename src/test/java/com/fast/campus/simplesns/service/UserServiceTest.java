@@ -1,7 +1,7 @@
 package com.fast.campus.simplesns.service;
 
 import com.fast.campus.simplesns.exception.ErrorCode;
-import com.fast.campus.simplesns.exception.SimpleSnsApplicationException;
+import com.fast.campus.simplesns.exception.SnsApplicationException;
 import com.fast.campus.simplesns.fixture.TestInfoFixture;
 import com.fast.campus.simplesns.fixture.UserEntityFixture;
 import com.fast.campus.simplesns.repository.UserEntityRepository;
@@ -44,7 +44,7 @@ public class UserServiceTest {
         TestInfoFixture.TestInfo fixture = TestInfoFixture.get();
 
         when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.empty());
-        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class
+        SnsApplicationException exception = Assertions.assertThrows(SnsApplicationException.class
                 , () -> userService.login(fixture.getUserName(), fixture.getPassword()));
 
         Assertions.assertEquals(ErrorCode.USER_NOT_FOUND, exception.getErrorCode());
@@ -58,7 +58,7 @@ public class UserServiceTest {
         when(userEntityRepository.findByUserName(fixture.getUserName())).thenReturn(Optional.of(UserEntityFixture.get(fixture.getUserName(), "password1")));
         when(bCryptPasswordEncoder.matches(fixture.getPassword(), "password1")).thenReturn(false);
 
-        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class
+        SnsApplicationException exception = Assertions.assertThrows(SnsApplicationException.class
                 , () -> userService.login(fixture.getUserName(), fixture.getPassword()));
 
         Assertions.assertEquals(ErrorCode.INVALID_PASSWORD, exception.getErrorCode());
@@ -83,7 +83,7 @@ public class UserServiceTest {
         when(userEntityRepository.findByUserName(fixture.getUserName()))
                 .thenReturn(Optional.of(UserEntityFixture.get(fixture.getUserName(), fixture.getPassword())));
 
-        SimpleSnsApplicationException exception = Assertions.assertThrows(SimpleSnsApplicationException.class,
+        SnsApplicationException exception = Assertions.assertThrows(SnsApplicationException.class,
                 () -> userService.join(fixture.getUserName(), fixture.getPassword()));
 
         Assertions.assertEquals(ErrorCode.DUPLICATED_USER_NAME, exception.getErrorCode());

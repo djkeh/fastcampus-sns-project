@@ -3,7 +3,7 @@ package com.fast.campus.simplesns.controller;
 import com.fast.campus.simplesns.controller.request.UserJoinRequest;
 import com.fast.campus.simplesns.controller.request.UserLoginRequest;
 import com.fast.campus.simplesns.exception.ErrorCode;
-import com.fast.campus.simplesns.exception.SimpleSnsApplicationException;
+import com.fast.campus.simplesns.exception.SnsApplicationException;
 import com.fast.campus.simplesns.model.User;
 import com.fast.campus.simplesns.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +59,7 @@ public class UserControllerTest {
     public void 회원가입시_같은_아이디로_회원가입하면_에러발생() throws Exception {
         String userName = "name";
         String password = "password";
-        when(userService.join(userName, password)).thenThrow(new SimpleSnsApplicationException(ErrorCode.DUPLICATED_USER_NAME));
+        when(userService.join(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME));
 
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -89,7 +89,7 @@ public class UserControllerTest {
         String userName = "name";
         String password = "password";
 
-        when(userService.login(userName, password)).thenThrow(new SimpleSnsApplicationException(ErrorCode.USER_NOT_FOUND));
+        when(userService.login(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.USER_NOT_FOUND));
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -104,7 +104,7 @@ public class UserControllerTest {
         String userName = "name";
         String password = "password";
 
-        when(userService.login(userName, password)).thenThrow(new SimpleSnsApplicationException(ErrorCode.INVALID_PASSWORD));
+        when(userService.login(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.INVALID_PASSWORD));
 
         mockMvc.perform(post("/api/v1/users/login")
                         .contentType(MediaType.APPLICATION_JSON)

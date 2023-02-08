@@ -12,8 +12,8 @@ import static com.fast.campus.simplesns.exception.ErrorCode.DATABASE_ERROR;
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
-    @ExceptionHandler(SimpleSnsApplicationException.class)
-    public ResponseEntity<?> errorHandler(SimpleSnsApplicationException e) {
+    @ExceptionHandler(SnsApplicationException.class)
+    public ResponseEntity<?> errorHandler(SnsApplicationException e) {
         log.error("Error occurs {}", e.toString());
         return ResponseEntity.status(e.getErrorCode().getStatus())
                 .body(Response.error(e.getErrorCode().name()));
