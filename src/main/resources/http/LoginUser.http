@@ -4,6 +4,6 @@ Content-Type: application/json
 Content-Length: 54
 
 {
-  "name":"donghyun",
+  "name":"donghyun2",
   "password":"123"
 }

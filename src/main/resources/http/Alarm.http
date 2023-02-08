@@ -1,0 +1,8 @@
+GET /api/v1/users/alarm HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6ImRvbmdoeXVuMiIsImlhdCI6MTY3NTg1Nzg1OSwiZXhwIjoxNjc4NDQ5ODU5fQ.l_Jeidosvd7maXyH5KtsddmKeBrUbZlBt1i9PSgx5O4
+Content-Length: 57
+
+{
+}
