@@ -1,0 +1,44 @@
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibertate.dialect.PostgreSQLDialect
+  hibernate.ddl-auto: update
+  properties.hibernate.format_sql: true
+  show-sql: true
+
+spring.datasource:
+  hikari.maximum-pool-size: 4
+  url: jdbc:postgresql://localhost:5432/postgres
+  username: postgres
+  password: postgres
+  platform: postgres
+  driver-class-name: org.postgresql.Driver
+
+jwt:
+  secret-key: fast_campus.sns-application-2023.secret_key
+  #30 Days
+  token.expired-time-ms: 2592000000
+
+spring.redis.url: redis://:p16eb8136279b2629c931d539b89c2491e9ef83cd2d9bc777afec1b649cb9b10d@ec2-3-224-198-214.compute-1.amazonaws.com:12979
+
+spring:
+  kafka:
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: SCRAM-SHA-256
+      sasl.jaas.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="smqmkcel" password="KFjCkkYHs7zI32d64M5avW-tAmvn8xG9";
+    consumer:
+      properties.spring.json.trusted.packages: "*"
+      bootstrap-servers: dory.srvs.cloudkafka.com:9094
+      group-id: alarm
+      auto.offset.reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      ack-mode: MANUAL
+    producer:
+      bootstrap-servers: dory.srvs.cloudkafka.com:9094
+      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties.enable.idempotence: false
+    topic:
+      alarm: smqmkcel-alarm
