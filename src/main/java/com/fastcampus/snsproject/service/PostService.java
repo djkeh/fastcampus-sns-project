@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class PostService {
 
-    private final PostEntityRepoistory postEntityRepoistory;
+    private final PostEntityRepoistory postEntityRepository;
 
     private final UserEntityRepository userEntityRepository;
 
@@ -36,7 +36,7 @@ public class PostService {
 //                .orElseThrow(() -> new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
         UserEntity userEntity = getUserEntityOrException(userName);
 
-        PostEntity postEntity = postEntityRepoistory.save(PostEntity.of(title, body, userEntity));
+        PostEntity postEntity = postEntityRepository.save(PostEntity.of(title, body, userEntity));
 
     }
 
@@ -63,7 +63,7 @@ public class PostService {
         postEntity.setTitle(title);
         postEntity.setBody(body);
 
-        return Post.fromEntity(postEntityRepoistory.saveAndFlush(postEntity));//saveAndFlush??
+        return Post.fromEntity(postEntityRepository.saveAndFlush(postEntity));//saveAndFlush??
     }
 
     @Transactional
@@ -85,12 +85,14 @@ public class PostService {
         if (postEntity.getUser() != userEntity) {
             throw new SnsApplicationException(ErrorCode.INVALID_PERMISSION, String.format("%s hs no permission with %s", userName, postId));
         }
-
-        postEntityRepoistory.delete(postEntity);
+//
+        likeEntityRepository.deleteAllByPost(postEntity);
+        commentEntityRepository.deleteAllByPost(postEntity);
+        postEntityRepository.delete(postEntity);
     }
 
     public Page<Post> list(Pageable pageable) {
-        return postEntityRepoistory.findAll(pageable).map(Post::fromEntity);
+        return postEntityRepository.findAll(pageable).map(Post::fromEntity);
     }
 
     public Page<Post> my(String userName, Pageable pageable) {
@@ -99,7 +101,7 @@ public class PostService {
         UserEntity userEntity = getUserEntityOrException(userName);
 
 
-        return postEntityRepoistory.findAllByUser(userEntity, pageable).map(Post::fromEntity);
+        return postEntityRepository.findAllByUser(userEntity, pageable).map(Post::fromEntity);
     }
 
 
@@ -133,7 +135,7 @@ public class PostService {
 
     }
 
-    public int likeCount(Integer postId) {
+    public Long likeCount(Integer postId) {
 
         //post exist
 //        PostEntity postEntity = postEntityRepoistory.findById(postId)
@@ -171,7 +173,7 @@ public class PostService {
 
     private PostEntity getPostEntityOrException(Integer postId) {
 
-        return postEntityRepoistory.findById(postId).orElseThrow(() ->
+        return postEntityRepository.findById(postId).orElseThrow(() ->
                 new SnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("%s not founded", postId)));
 
     }
