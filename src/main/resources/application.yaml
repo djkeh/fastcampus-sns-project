@@ -1,0 +1,48 @@
+jwt:
+  secret-key: fast_campus.sns-application-2023.secret_key
+  # 30 days
+  token.expired-time-ms: 2592000000
+
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgresSQLDialect
+  hibernate.ddl-auto: update
+  properties.hibernate.format_sql: true
+  show-sql: true
+
+spring.datasource:
+  hikari.maximum-pool-size: 4
+  url: jdbc:postgresql://ec2-54-163-140-5.compute-1.amazonaws.com/de3cestlqkekp0?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+  username: u7bjqnltofpp1p
+  password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
+  platform: postgres
+  driver-class-name: org.postgresql.Driver
+
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/fastcampus_sns_project?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+#    username: spring
+#    password: spring123
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    open-in-view: false
+#    show-sql: true
+#    hibernate:
+#      format_sql: true
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        jdbc:
+#          time_zone: Asia/Seoul
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
