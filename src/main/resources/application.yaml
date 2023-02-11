@@ -1,0 +1,54 @@
+spring:
+  jpa:
+    database: postgresql
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      platform: postgres
+
+  kafka:
+    properties:
+      security-protocol: SASL_SSL
+      sasl.mechanism: SCRAM-SHA-256
+      sasl.jass.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="kjdqmgsy" password="QA417G16Lkd2pTF8xcePqE41VWJu_SSg";
+    consumer:
+      properties.spring.json.trusted.packages: "*"
+      bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+      group-id: alarm
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      ack-mode: MANUAL
+    producer:
+      bootstrap-servers: dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+      key-deserializer: org.apache.kafka.common.serialization.IntegerSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties.enable.idempotence: false
+    topic: kjdqmgsy-alarm
+
+spring.datasource:
+  hikari.maxium-pool-size: 4
+  url: jdbc:postgresql://ec2-44-208-88-195.compute-1.amazonaws.com:5432/db6fvg6l1h9fog
+  username: mekjpqnmutlpgj
+  password: d3f027cd888f1cff2b6b191a608b9a81b10474fb7abe09635454f1ded230cbec
+  driver-class-name: org.postgresql.Driver
+
+#spring.datasource:
+#  hikari.maxium-pool-size: 4
+#  url: jdbc:postgresql://ec2-54-163-140-5.compute-1.amazonaws.com:5432/de3cestlqkekp0
+#  username: u7bjqnltofpp1p
+#  password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
+#  driver-class-name: org.postgresql.Driver
+
+jwt:
+  secret-key: fast_campus.sns-application-2022.secret_key
+  # 30 days
+  token.expired-time-ms: 2592000000
+
+
