@@ -16,3 +16,14 @@ jwt:
   token.expired-time-ms: 2592000000
 
 spring.redis.url: redis://localhost:6379
+
+---
+
+spring:
+  config.activate.on-profile: heroku
+  datasource:
+    url: ${DATABASE_URL}
+  jpa.hibernate.ddl-auto: create
+  sql.init.mode: always
+  # TODO: 헤로쿠 환경에서 Redis 사용 안 함
+  data.redis.repositories.enabled: false

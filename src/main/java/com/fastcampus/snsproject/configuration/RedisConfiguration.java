@@ -13,14 +13,15 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-@Configuration
-@EnableRedisRepositories
+// TODO: 헤로쿠에서 redis 안 씀
+//@Configuration
+//@EnableRedisRepositories
 @RequiredArgsConstructor
 public class RedisConfiguration {
 
     private final RedisProperties redisProperties;
 
-    @Bean
+//    @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisURI redisURI = RedisURI.create(redisProperties.getUrl());
         org.springframework.data.redis.connection.RedisConfiguration configuration = LettuceConnectionFactory.createRedisConfiguration(redisURI);
@@ -30,7 +31,7 @@ public class RedisConfiguration {
     }
 
 
-    @Bean
+//    @Bean
     public RedisTemplate<String, User> userRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, User> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
