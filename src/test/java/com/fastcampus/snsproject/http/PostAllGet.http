@@ -1,0 +1,3 @@
+GET http://localhost:8080/api/v1/posts?size=10&page=0&sort=id
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6InRlc3QiLCJpYXQiOjE2NzU3ODE4MzgsImV4cCI6MTY3ODM3MzgzOH0.U-mEIRsvMzj5pRghK8N1aCqVqdBWN3Fh4OVoT4NOQfs

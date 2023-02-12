@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/v1/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6InRlc3QxIiwiaWF0IjoxNjc1Nzc3OTU1LCJleHAiOjE2NzgzNjk5NTV9.hOVSY9DyY5NTKPIarmGn6rzuRKpsJ7XzZdUD3j6-Ibc
+
+{
+  "title": "제목2",
+  "body": "본문2"
+}
