@@ -1,4 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,gradle,windows,macos,intellij+all,visualstudiocode
+  # Created by https://www.toptal.com/developers/gitignore/api/java,gradle,windows,macos,intellij+all,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,gradle,windows,macos,intellij+all,visualstudiocode
 
 ### Intellij+all ###
@@ -223,3 +223,6 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,windows,macos,intellij+all,visualstudiocode
+
+**/front-end/node_modules/**
+**/front-end/static/**

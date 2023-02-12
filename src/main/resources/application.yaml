@@ -1,0 +1,53 @@
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  hibernate.ddl-auto: update
+  properties.hibernate.format_sql: ture
+  show-sql: true
+
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://ec2-54-163-140-5.compute-1.amazonaws.com:5432/de3cestlqkekp0
+    username: u7bjqnltofpp1p
+    password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+
+#  kafka:
+#    properties:
+#      security.protocol: SASL_SSL
+#      sasl.mechanism: SCRAM-SHA-256
+#      sasl.jass.config: org.apache.kafka.common.security.scram.ScramLoginModule required username="tbokvffz" password="gbS9_rezAH822V2L7fuadFQ4bcUefJjz";
+#    consumer:
+#      properties.spring.json.trusted.package: "*"
+#      bootstrap-servers: dory.srvs.cloudkafka.com:9094 # dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+#      group-id: alarm
+#      auto-offset-reset: latest
+#      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#    listener:
+#      ack-mode: MANUAL
+#    producer:
+#      bootstrap-servers: dory.srvs.cloudkafka.com:9094 # dory-01.srvs.cloudkafka.com:9094, dory-02.srvs.cloudkafka.com:9094, dory-03.srvs.cloudkafka.com:9094
+#      key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      properties.enable.idempotence: false
+#    topic:
+#      alarm: tbokvffz-alarm
+
+#    host: dory.srvs.cloudkafka.com:9094
+#    user: tbokvffz
+#    password: gbS9_rezAH822V2L7fuadFQ4bcUefJjz
+
+#  redis:
+#    url:
+
+
+Jwt:
+  secret-key : fast_campus_helios.sns-application-2022.secret_key
+  # 30 Days
+  token.expired-time-ms: 2592000000
+
+
