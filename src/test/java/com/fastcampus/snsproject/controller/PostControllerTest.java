@@ -1,5 +1,6 @@
 package com.fastcampus.snsproject.controller;
 
+import com.fastcampus.snsproject.controller.request.PostCommentRequest;
 import com.fastcampus.snsproject.controller.request.PostCreateRequest;
 import com.fastcampus.snsproject.controller.request.PostModifyRequest;
 import com.fastcampus.snsproject.controller.request.UserJoinRequest;
@@ -221,5 +222,68 @@ public class PostControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
                 .andExpect(status().isUnauthorized());
+    }
+
+
+    @Test
+    @WithMockUser
+    void 좋아요기능() throws Exception{
+        mockMvc.perform(post("/api/v1/posts/1/likes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithAnonymousUser
+    void 좋아요버튼클릭시_로그인하지_않는경우() throws Exception{
+        mockMvc.perform(post("/api/v1/posts/1/likes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser
+    void 좋아요버튼클릭시_게시물이_없는경우() throws Exception{
+        doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).like(any(), any());
+
+        mockMvc.perform(post("/api/v1/posts/1/likes")
+                        .contentType(MediaType.APPLICATION_JSON)
+                ).andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+
+    @Test
+    @WithMockUser
+    void 댓글기능() throws Exception{
+        mockMvc.perform(post("/api/v1/posts/1/comments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment")))
+                ).andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithAnonymousUser
+    void 댓글작성시_로그인하지_않는경우() throws Exception{
+        mockMvc.perform(post("/api/v1/posts/1/comments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment")))
+                ).andDo(print())
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser
+    void 댓글작성시_게시물이_없는경우() throws Exception{
+        doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).comment(any(), any(), any());
+
+        mockMvc.perform(post("/api/v1/posts/1/comments")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsBytes(new PostCommentRequest("comment")))
+                ).andDo(print())
+                .andExpect(status().isNotFound());
     }
 }
