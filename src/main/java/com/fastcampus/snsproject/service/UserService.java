@@ -47,7 +47,8 @@ public class UserService {
 
     public String login(String userName, String password) {
         // 회원가입 여부 체크
-        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() -> new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
+        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
+                new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
 
         // 비밀번호 체크
         //if(!userEntity.getPassword().equals(password)){
