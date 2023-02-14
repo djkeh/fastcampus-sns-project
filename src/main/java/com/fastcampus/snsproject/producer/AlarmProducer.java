@@ -1,3 +1,4 @@
+/*
 package com.fastcampus.snsproject.producer;
 
 
@@ -22,4 +23,4 @@ public class AlarmProducer {
         KafkaTemplate.send(topic, event.getReceiveUserId(), event);
         log.info("Send to Kafka finished");
     }
-}
+}*/

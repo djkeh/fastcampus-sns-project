@@ -1,4 +1,4 @@
-package com.fastcampus.snsproject.consumer;
+/*package com.fastcampus.snsproject.consumer;
 
 import com.fastcampus.snsproject.model.event.AlarmEvent;
 import com.fastcampus.snsproject.service.AlarmService;
@@ -21,4 +21,4 @@ public class AlarmConsumer {
         alarmService.send(event.getType(), event.getArgs(), event.getReceiveUserId());
         ack.acknowledge();
     }
-}
+}*/
