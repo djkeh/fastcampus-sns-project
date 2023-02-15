@@ -1,12 +1,19 @@
 plugins {
+<<<<<<< HEAD
     id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id "com.github.node-gradle.node" version "3.3.0"
+=======
+    id 'java'
+    id 'org.springframework.boot' version '2.7.7'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+>>>>>>> 8594a7460f97670bcaceae4f419a40203f365987
 }
 
 group = 'com.fastcampus'
 version = '0.0.1-SNAPSHOT'
+<<<<<<< HEAD
 sourceCompatibility = '11'
 
 configurations {
@@ -14,12 +21,16 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+=======
+sourceCompatibility = '17'
+>>>>>>> 8594a7460f97670bcaceae4f419a40203f365987
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+<<<<<<< HEAD
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -38,11 +49,16 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+=======
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+>>>>>>> 8594a7460f97670bcaceae4f419a40203f365987
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+<<<<<<< HEAD
 
 node {
     nodeModulesDir = file("$projectDir/front-end")
@@ -68,3 +84,5 @@ copyFrontEnd.dependsOn npmBuild
 compileJava.dependsOn copyFrontEnd
 
 clean.dependsOn cleanFrontEnd
+=======
+>>>>>>> 8594a7460f97670bcaceae4f419a40203f365987
