@@ -1,27 +1,23 @@
-package com.fastcampus.sns.controller.response;
+package com.fastcampus.snsproject.controller.response;
 
-import com.fastcampus.sns.model.User;
-import com.fastcampus.sns.model.UserRole;
+import com.fastcampus.snsproject.model.User;
+import com.fastcampus.snsproject.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class UserJoinResponse {
 
     private Integer id;
     private String userName;
     private UserRole role;
 
-    public static UserJoinResponse fromUser(User user){
-
+    public static UserJoinResponse fromUser(User user) {
         return new UserJoinResponse(
                 user.getId(),
                 user.getUsername(),
                 user.getUserRole()
         );
-
     }
-
 }

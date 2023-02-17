@@ -1,6 +1,6 @@
-package com.fastcampus.sns.exception;
+package com.fastcampus.snsproject.exception;
 
-import com.fastcampus.sns.controller.response.Response;
+import com.fastcampus.snsproject.controller.response.Response;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 

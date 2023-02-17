@@ -1,8 +1,6 @@
-package com.fastcampus.sns.model;
+package com.fastcampus.snsproject.model;
 
 public enum UserRole {
-
     ADMIN,
     USER
-
 }

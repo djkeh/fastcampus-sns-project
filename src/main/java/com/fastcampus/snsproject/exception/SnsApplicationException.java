@@ -1,16 +1,18 @@
-package com.fastcampus.sns.exception;
+package com.fastcampus.snsproject.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//todo:implement
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class SnsApplicationException extends RuntimeException{
+public class SnsApplicationException extends RuntimeException {
 
     private ErrorCode errorCode;
     private String message;
-    public SnsApplicationException(ErrorCode errorCode){
+
+    public SnsApplicationException(ErrorCode errorCode) {
         this.errorCode = errorCode;
         this.message = null;
     }

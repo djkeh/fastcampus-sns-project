@@ -1,12 +1,12 @@
-package com.fastcampus.sns.fixture;
+package com.fastcampus.snsproject.fixture;
 
-import com.fastcampus.sns.model.entity.UserEntity;
+import com.fastcampus.snsproject.model.entity.UserEntity;
 
 public class UserEntityFixture {
 
     public static UserEntity get(String userName, String password, Integer userId){
         UserEntity result = new UserEntity();
-        result.setId(1);
+        result.setId(userId);
         result.setUserName(userName);
         result.setPassword(password);
 

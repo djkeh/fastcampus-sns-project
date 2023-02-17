@@ -1,11 +1,12 @@
-package com.fastcampus.snsproject.controller.request;
+package com.fastcampus.snsproject.controller.reqeust;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class UserLoginRequest {
-    private String userName;
+
+    private String name;
     private String password;
 }

@@ -1,13 +1,13 @@
-package com.fastcampus.sns.service;
+package com.fastcampus.snsproject.service;
 
-import com.fastcampus.sns.exception.ErrorCode;
-import com.fastcampus.sns.exception.SnsApplicationException;
-import com.fastcampus.sns.fixture.PostEntityFixture;
-import com.fastcampus.sns.fixture.UserEntityFixture;
-import com.fastcampus.sns.model.entity.PostEntity;
-import com.fastcampus.sns.model.entity.UserEntity;
-import com.fastcampus.sns.repository.PostEntityRepository;
-import com.fastcampus.sns.repository.UserEntityRepository;
+import com.fastcampus.snsproject.exception.ErrorCode;
+import com.fastcampus.snsproject.exception.SnsApplicationException;
+import com.fastcampus.snsproject.fixture.PostEntityFixture;
+import com.fastcampus.snsproject.fixture.UserEntityFixture;
+import com.fastcampus.snsproject.model.entity.PostEntity;
+import com.fastcampus.snsproject.model.entity.UserEntity;
+import com.fastcampus.snsproject.repository.PostEntityRepository;
+import com.fastcampus.snsproject.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

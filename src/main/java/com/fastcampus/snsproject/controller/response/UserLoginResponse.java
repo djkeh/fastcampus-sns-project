@@ -1,15 +1,11 @@
-package com.fastcampus.sns.controller.response;
+package com.fastcampus.snsproject.controller.response;
 
-import com.fastcampus.sns.model.User;
-import com.fastcampus.sns.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public class UserLoginResponse {
-
-    private String token;
+    private  String token;
 
 }

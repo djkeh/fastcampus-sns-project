@@ -1,4 +1,4 @@
-package com.fastcampus.snsproject.controller.request;
+package com.fastcampus.snsproject.controller.reqeust;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PostModifyRequest {
+
     private String title;
     private String body;
 }

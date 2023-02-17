@@ -1,6 +1,5 @@
 package com.fastcampus.snsproject.model.entity;
 
-import com.fastcampus.snsproject.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -11,27 +10,29 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "\"comment\"", indexes = {
+        @Index(name = "post_id_idx", columnList = "post_id")
+})
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE user SET deleted_at = NOW() where id=?")
+@SQLDelete(sql = "UPDATE \"comment\" SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
-//DB에서 User 테이블을 처리하는 부분
-public class UserEntity {
+public class CommentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_name")
-    private String userName;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-    @Column(name = "password")
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private PostEntity post;
 
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private UserRole role = UserRole.USER;
+    @Column(name = "comment")
+    private String comment;
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;
@@ -52,11 +53,11 @@ public class UserEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static UserEntity of(String userName, String password) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userName);
-        userEntity.setPassword(password);
-
-        return userEntity;
+    public static CommentEntity of(UserEntity userEntity, PostEntity postEntity, String comment) {
+        CommentEntity entity = new CommentEntity();
+        entity.setUser(userEntity);
+        entity.setPost(postEntity);
+        entity.setComment(comment);
+        return entity;
     }
 }

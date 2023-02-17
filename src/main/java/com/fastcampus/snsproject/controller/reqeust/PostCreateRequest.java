@@ -1,11 +1,12 @@
-package com.fastcampus.snsproject.controller.request;
+package com.fastcampus.snsproject.controller.reqeust;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PostModifyRequest {
+public class PostCreateRequest {
+
     private String title;
     private String body;
 }

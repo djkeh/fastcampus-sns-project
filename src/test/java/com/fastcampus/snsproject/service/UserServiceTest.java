@@ -1,11 +1,10 @@
-package com.fastcampus.sns.service;
+package com.fastcampus.snsproject.service;
 
-import com.fastcampus.sns.SnsApplication;
-import com.fastcampus.sns.exception.ErrorCode;
-import com.fastcampus.sns.exception.SnsApplicationException;
-import com.fastcampus.sns.fixture.UserEntityFixture;
-import com.fastcampus.sns.model.entity.UserEntity;
-import com.fastcampus.sns.repository.UserEntityRepository;
+import com.fastcampus.snsproject.exception.ErrorCode;
+import com.fastcampus.snsproject.exception.SnsApplicationException;
+import com.fastcampus.snsproject.fixture.UserEntityFixture;
+import com.fastcampus.snsproject.model.entity.UserEntity;
+import com.fastcampus.snsproject.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +97,6 @@ public class UserServiceTest {
         when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.of(fixture));
 
         SnsApplicationException e = Assertions.assertThrows(SnsApplicationException.class, () -> userService.login(userName,wrongPassword));
-        Assertions.assertEquals(ErrorCode.INVALID_PASSWORD, e.getErrorCode());
+        Assertions.assertEquals(ErrorCode.INVALID_ID_PASSWORD, e.getErrorCode());
     }
 }

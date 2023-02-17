@@ -1,4 +1,5 @@
-package com.fastcampus.sns.util;
+package com.fastcampus.snsproject.util;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,25 +11,22 @@ import java.util.Date;
 
 public class JwtTokenUtils {
 
-
-    public static String getUserName(String token, String key){
-
+    public static String getUserName(String token, String key) {
         return extractClaims(token, key).get("userName", String.class);
-
     }
 
-    public static boolean isExpired(String token, String key){
+    public static boolean isExpired(String token, String key) {
         Date expiredDate = extractClaims(token, key).getExpiration();
         return expiredDate.before(new Date());
     }
-    private static Claims extractClaims(String token, String key){
-        return Jwts.parserBuilder().setSigningKey(getKey(key))
-                .build().parseClaimsJws(token).getBody();
+
+    private static Claims extractClaims(String token, String key) {
+        return Jwts.parserBuilder().setSigningKey(getKey(key)).build().parseClaimsJws(token).getBody();
     }
 
-    public static String generateToken(String userName, String key, long expiredTimeMs){
-        Claims claims =Jwts.claims();
-        claims.put("userName",userName);
+    public static String generatedToken(String userName, String key, long expiredTimeMs) {
+        Claims claims = Jwts.claims();
+        claims.put("userName", userName);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -38,7 +36,7 @@ public class JwtTokenUtils {
                 .compact();
     }
 
-    private static Key getKey(String key){
+    private static Key getKey(String key) {
         byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }

@@ -1,11 +1,11 @@
-package com.fastcampus.sns.controller;
+package com.fastcampus.snsproject.controller;
 
-import com.fastcampus.sns.controller.request.UserJoinRequest;
-import com.fastcampus.sns.controller.request.UserLoginRequest;
-import com.fastcampus.sns.exception.ErrorCode;
-import com.fastcampus.sns.exception.SnsApplicationException;
-import com.fastcampus.sns.model.User;
-import com.fastcampus.sns.service.UserService;
+import com.fastcampus.snsproject.controller.request.UserJoinRequest;
+import com.fastcampus.snsproject.controller.request.UserLoginRequest;
+import com.fastcampus.snsproject.exception.ErrorCode;
+import com.fastcampus.snsproject.exception.SnsApplicationException;
+import com.fastcampus.snsproject.model.User;
+import com.fastcampus.snsproject.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

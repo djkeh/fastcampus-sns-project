@@ -1,25 +1,19 @@
 package com.fastcampus.snsproject.model;
 
-import com.fastcampus.snsproject.model.entity.PostEntity;
-import com.fastcampus.snsproject.model.entity.UserEntity;
+import com.fastcampus.snsproject.model.entity.AlarmEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
-public class Post {
-
-    @Id
+public class Alarm {
     private Integer id;
 
-    private String title;
+    private AlarmType alarmType;
 
-    private String body;
-
-    private User user;
+    private AlarmArgs args;
 
     private Timestamp registeredAt;
 
@@ -27,15 +21,15 @@ public class Post {
 
     private Timestamp deletedAt;
 
-    public static Post fromEntity(PostEntity entity) {
-        return new Post(
+    public static Alarm fromEntity(AlarmEntity entity) {
+        return new Alarm(
                 entity.getId(),
-                entity.getTitle(),
-                entity.getBody(),
-                User.fromEntity(entity.getUser()),
+                entity.getAlarmType(),
+                entity.getArgs(),
                 entity.getRegisteredAt(),
                 entity.getUpdatedAt(),
                 entity.getDeletedAt()
         );
     }
+
 }

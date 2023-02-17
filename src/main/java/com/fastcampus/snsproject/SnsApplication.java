@@ -1,4 +1,4 @@
-package com.fastcampus.sns;
+package com.fastcampus.snsproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package com.fastcampus.sns.fixture;
+package com.fastcampus.snsproject.fixture;
 
-import com.fastcampus.sns.model.entity.PostEntity;
-import com.fastcampus.sns.model.entity.UserEntity;
+import com.fastcampus.snsproject.model.entity.PostEntity;
+import com.fastcampus.snsproject.model.entity.UserEntity;
 
 public class PostEntityFixture {
 
