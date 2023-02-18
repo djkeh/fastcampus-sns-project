@@ -1,4 +1,4 @@
-package com.fastcampus.snsproject.controller.configuration.filter;
+package com.fastcampus.snsproject.configuration.filter;
 
 import com.fastcampus.snsproject.model.User;
 import com.fastcampus.snsproject.service.UserService;

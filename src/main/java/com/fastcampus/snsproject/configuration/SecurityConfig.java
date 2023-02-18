@@ -1,4 +1,4 @@
-package com.fastcampus.snsproject.controller.configuration;
+package com.fastcampus.snsproject.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
