@@ -5,9 +5,18 @@ spring.datasource:
   password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
   driver-class-name: org.postgresql.Driver
 
-spring.jpa:
-  database: postgresql
-  hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-  hibernate.ddl-auto: update
-  hibernate.format_sql: true
-  show-sql: true
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+jwt:
+  secret-key: fast_campus.sns-application-2022.secret_key
+  token.expired-time-ms: 86400000 # 1 Days
+
+
