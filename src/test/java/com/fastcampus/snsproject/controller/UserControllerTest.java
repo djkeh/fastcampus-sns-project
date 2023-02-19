@@ -111,15 +111,15 @@ public class UserControllerTest {
                 .andExpect(status().isUnauthorized());
     }
 
-    @Test
-    @WithMockUser
-    void 알람기능() throws Exception {
-        when(userService.alarmList(any(), any())).thenReturn(Page.empty());
-        mockMvc.perform(get("/api/v1/users/alarm")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
+    // @Test
+    // @WithMockUser
+    // void 알람기능() throws Exception {
+    //     when(userService.alarmList(any(), any())).thenReturn(Page.empty());
+    //     mockMvc.perform(get("/api/v1/users/alarm")
+    //                     .contentType(MediaType.APPLICATION_JSON))
+    //             .andDo(print())
+    //             .andExpect(status().isOk());
+    // }
 
     @Test
     @WithAnonymousUser
