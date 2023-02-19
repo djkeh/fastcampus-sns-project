@@ -58,7 +58,7 @@ public class UserControllerTest {
         String userName = "userName";
         String password = "password";
 
-        when(userService.join(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME, ""));
+        when(userService.join(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME));
 
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -113,7 +113,7 @@ public class UserControllerTest {
     @WithMockUser
     void 알람기능() throws Exception {
         when(userService.alarmList(any(), any())).thenReturn(Page.empty());
-        mockMvc.perform(get("api/v1/users/alarm")
+        mockMvc.perform(get("/api/v1/users/alarm")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -123,7 +123,7 @@ public class UserControllerTest {
     @WithAnonymousUser
     void 알람기능요청시_로그인하지_않은경우() throws Exception {
         when(userService.alarmList(any(), any())).thenReturn(Page.empty());
-        mockMvc.perform(get("api/v1/users/alarm")
+        mockMvc.perform(get("/api/v1/users/alarm")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());

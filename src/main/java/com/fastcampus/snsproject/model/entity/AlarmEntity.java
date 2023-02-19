@@ -20,7 +20,7 @@ import java.time.Instant;
 @Setter
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @SQLDelete(sql = "UPDATE \"alarm\" SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "delete_at IS NULL")
+@Where(clause = "deleted_at IS NULL")
 public class AlarmEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,7 @@ public class AlarmEntity {
         this.registeredAt = Timestamp.from(Instant.now());
     }
 
-    @PrePersist
+    @PreUpdate
     void updatedAt() {
         this.updatedAt = Timestamp.from(Instant.now());
     }

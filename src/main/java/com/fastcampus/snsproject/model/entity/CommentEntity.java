@@ -14,7 +14,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @SQLDelete(sql = "UPDATE \"comment\" SET deleted_at = NOW() WHERE id = ?")
-@Where(clause = "delete_at IS NULL")
+@Where(clause = "deleted_at IS NULL")
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +45,7 @@ public class CommentEntity {
         this.registeredAt = Timestamp.from(Instant.now());
     }
 
-    @PrePersist
+    @PreUpdate
     void updatedAt() {
         this.updatedAt = Timestamp.from(Instant.now());
     }

@@ -95,7 +95,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @WithAnonymousUser
+    @WithMockUser
     void 포스트수정시_본인이_작성한_글이_아니라면_에러발생() throws Exception {
         String title = "title";
         String body = "body";
@@ -110,7 +110,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @WithAnonymousUser
+    @WithMockUser
     void 포스트수정시_수정하려는_글이_없는경우_에러발생() throws Exception {
         String title = "title";
         String body = "body";
@@ -180,7 +180,7 @@ public class PostControllerTest {
     void 피드목록요청시_로그인하지_않은경우() throws Exception {
         when(postService.list(any())).thenReturn(Page.empty());
 
-        mockMvc.perform(delete("/api/v1/posts")
+        mockMvc.perform(get("/api/v1/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
                 .andExpect(status().isUnauthorized());
@@ -191,7 +191,7 @@ public class PostControllerTest {
     void 내피드목록() throws Exception {
         when(postService.my(any(), any())).thenReturn(Page.empty());
 
-        mockMvc.perform(get("/api/v1/my")
+        mockMvc.perform(get("/api/v1/posts/my")
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
                 .andExpect(status().isOk());
@@ -202,7 +202,7 @@ public class PostControllerTest {
     void 내피드목록요청시_로그인하지_않은경우() throws Exception {
         when(postService.my(any(), any())).thenReturn(Page.empty());
 
-        mockMvc.perform(delete("/api/v1/my")
+        mockMvc.perform(get("/api/v1/posts/my")
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
                 .andExpect(status().isUnauthorized());
@@ -227,7 +227,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @WithAnonymousUser
+    @WithMockUser
     void 좋아요버튼클릭시_게시물이_없는경우() throws Exception {
         doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).like(any(), any());
 
@@ -258,7 +258,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @WithAnonymousUser
+    @WithMockUser
     void 댓글작성시_게시물이_없는경우() throws Exception {
         doThrow(new SnsApplicationException(ErrorCode.POST_NOT_FOUND)).when(postService).comment(any(), any(), any());
 

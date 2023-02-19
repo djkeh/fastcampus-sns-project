@@ -30,7 +30,7 @@ public class UserService {
     private String secretKey;
 
     @Value("${jwt.token.expired-time-ms}")
-    private long expiredTimeMs;
+    private Long expiredTimeMs;
 
     @Transactional
     public User join(String userName, String password) {
