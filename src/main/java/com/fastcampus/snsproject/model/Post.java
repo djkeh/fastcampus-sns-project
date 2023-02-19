@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
 public class Post {
-    private Integer id = null;
+    private Integer id;
 
     private String title;
 
@@ -23,7 +23,7 @@ public class Post {
 
     private Timestamp updatedAt;
 
-    private Timestamp removedAt;
+    private Timestamp deletedAt;
 
     public static Post fromEntity(PostEntity entity) {
         return new Post(
@@ -33,7 +33,7 @@ public class Post {
                 User.fromEntity(entity.getUser()),
                 entity.getRegisteredAt(),
                 entity.getUpdatedAt(),
-                entity.getRemovedAt()
+                entity.getDeletedAt()
         );
     }
 }

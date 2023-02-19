@@ -8,14 +8,20 @@ import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
-public
-class PostResponse {
+public class PostResponse {
     private Integer id;
+
     private String title;
+
     private String body;
+
     private UserResponse user;
+
     private Timestamp registeredAt;
+
     private Timestamp updatedAt;
+
+    private Timestamp deletedAt;
 
     public static PostResponse fromPost(Post post) {
         return new PostResponse(
@@ -24,7 +30,8 @@ class PostResponse {
                 post.getBody(),
                 UserResponse.fromUser(post.getUser()),
                 post.getRegisteredAt(),
-                post.getUpdatedAt()
+                post.getUpdatedAt(),
+                post.getDeletedAt()
         );
     }
 

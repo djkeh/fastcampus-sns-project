@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PostWriteRequest {
+public class PostCreateRequest {
     private String title;
     private String body;
 }

@@ -3,7 +3,6 @@ package com.fastcampus.snsproject.service;
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SimpleSnsApplicationException;
 import com.fastcampus.snsproject.model.AlarmArgs;
-import com.fastcampus.snsproject.model.AlarmEvent;
 import com.fastcampus.snsproject.model.AlarmNoti;
 import com.fastcampus.snsproject.model.AlarmType;
 import com.fastcampus.snsproject.model.entity.AlarmEntity;

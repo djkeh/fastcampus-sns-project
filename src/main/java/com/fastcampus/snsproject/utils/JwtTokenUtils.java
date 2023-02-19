@@ -12,15 +12,15 @@ import java.util.Date;
 public class JwtTokenUtils {
 
     public static String getUserName(String token, String key) {
-        return extractAllClaims(token, key).get("userName", String.class);
+        return extractClaims(token, key).get("userName", String.class);
     }
 
     public static Boolean isExpired(String token, String key) {
-        Date expiredDate = extractAllClaims(token, key).getExpiration();
+        Date expiredDate = extractClaims(token, key).getExpiration();
         return expiredDate.before(new Date());
     }
 
-    public static Claims extractAllClaims(String token, String key) {
+    public static Claims extractClaims(String token, String key) {
         return Jwts.parserBuilder()
                 .setSigningKey(getKey(key))
                 .build()

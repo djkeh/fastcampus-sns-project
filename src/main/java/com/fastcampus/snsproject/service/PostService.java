@@ -2,6 +2,7 @@ package com.fastcampus.snsproject.service;
 
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
+import com.fastcampus.snsproject.model.Post;
 import com.fastcampus.snsproject.model.entity.PostEntity;
 import com.fastcampus.snsproject.model.entity.UserEntity;
 import com.fastcampus.snsproject.repository.PostEntityRepository;
@@ -22,9 +23,30 @@ public class PostService {
 
     @Transactional
     public void create(String title, String body, String userName) {
-        UserEntity userEntity = userEntityRepository.findByUserName(userName)
-                .orElseThrow(() -> new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
-        postEntityRepository.save(PostEntity.of(title, body, userEntity));
+        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
+                new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
+
+        PostEntity saved = postEntityRepository.save(PostEntity.of(title, body, userEntity));
+    }
+
+    @Transactional
+    public Post modify(String title, String body, String userName, Integer postId) {
+        UserEntity userEntity = userEntityRepository.findByUserName(userName).orElseThrow(() ->
+                new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)));
+
+        // post exist
+        PostEntity postEntity = postEntityRepository.findById(postId).orElseThrow(() ->
+                new SnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("%s not founded", postId)));
+
+        // post permission
+        if(postEntity.getUser() != userEntity) {
+            throw new SnsApplicationException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission with %s", userName, postId));
+        }
+
+        postEntity.setTitle(title);
+        postEntity.setBody(body);
+
+        return Post.fromEntity(postEntityRepository.save(postEntity));
     }
 /*
 
@@ -35,19 +57,6 @@ public class PostService {
 
     public Page<Post> my(Integer userId, Pageable pageable) {
         return postEntityRepository.findAllByUserId(userId, pageable).map(Post::fromEntity);
-    }
-
-    @Transactional
-    public Post modify(Integer userId, Integer postId, String title, String body) {
-        PostEntity postEntity = postEntityRepository.findById(postId).orElseThrow(() -> new SnsApplicationException(ErrorCode.POST_NOT_FOUND, String.format("postId is %d", postId)));
-        if (!Objects.equals(postEntity.getUser().getId(), userId)) {
-            throw new SnsApplicationException(ErrorCode.INVALID_PERMISSION, String.format("user %s has no permission with post %d", userId, postId));
-        }
-
-        postEntity.setTitle(title);
-        postEntity.setBody(body);
-
-        return Post.fromEntity(postEntityRepository.saveAndFlush(postEntity));
     }
 
     @Transactional

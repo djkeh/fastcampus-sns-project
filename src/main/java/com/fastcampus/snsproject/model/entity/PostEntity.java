@@ -1,5 +1,6 @@
 package com.fastcampus.snsproject.model.entity;
 
+import com.fastcampus.snsproject.model.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,12 +35,6 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    /*
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private List<LikeEntity> likes;
-*/
-
     @Column(name = "registered_at")
     private Timestamp registeredAt;
 
@@ -48,7 +43,6 @@ public class PostEntity {
 
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
-
 
     @PrePersist
     void registeredAt() {
@@ -60,7 +54,11 @@ public class PostEntity {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-/*
+    /*
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private List<LikeEntity> likes;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private List<CommentEntity> comments;
@@ -72,6 +70,7 @@ public class PostEntity {
         entity.setTitle(title);
         entity.setBody(body);
         entity.setUser(userEntity);
+
         return entity;
     }
 }
