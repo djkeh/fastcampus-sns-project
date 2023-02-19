@@ -7,6 +7,7 @@ import lombok.*;
 
 import com.fastcampus.snsproject.model.entity.UserEntity;
 
+@Getter
 @AllArgsConstructor;
 public class User {
 	private Integer id;
