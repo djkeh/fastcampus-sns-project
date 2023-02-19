@@ -1,0 +1,32 @@
+spring.jpa:
+  database: postgresql
+  hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+  hibernate.ddl-auto: update
+  properties.hibernate.format_sql: true
+  show-sql : true
+
+
+spring.datasource:
+  hikari.maximum-pool-size: 4
+  url: jdbc:postgresql://ec2-54-163-140-5.compute-1.amazonaws.com:5432/de3cestlqkekp0
+  username: u7bjqnltofpp1p
+  password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
+  platform: postgres
+  driver-class-name: org.postgresql.Driver
+
+jwt:
+  secret-key: fast-campus.simple_sns_2022_secret_key
+  # 30 days
+  token.expired-time-ms: 2592000000
+
+
+
+
+#  안녕하세요 여러분, Heroku PostgreSQL 접속 정보가 갱신되어 재안내 드립니다.
+#  아래 정보를 사용해 주시기 바랍니다!
+#
+#  -Host: ec2-54-163-140-5.compute-1.amazonaws.com
+#  -Database: de3cestlqkekp0
+#  -User: u7bjqnltofpp1p
+#  -port: 5432
+#  -Password: p240170e441a1aa72fee6bba192898a83e9c30edf1f7aeb94329e15e34bc3dc2c
