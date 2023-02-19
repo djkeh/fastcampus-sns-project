@@ -2,9 +2,14 @@ package com.fastcampus.snsproject.service;
 
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
-import com.fastcampus.snsproject.model.Post;
+import com.fastcampus.snsproject.model.*;
+import com.fastcampus.snsproject.model.entity.CommentEntity;
+import com.fastcampus.snsproject.model.entity.LikeEntity;
 import com.fastcampus.snsproject.model.entity.PostEntity;
 import com.fastcampus.snsproject.model.entity.UserEntity;
+import com.fastcampus.snsproject.producer.AlarmProducer;
+import com.fastcampus.snsproject.repository.CommentEntityRepository;
+import com.fastcampus.snsproject.repository.LikeEntityRepository;
 import com.fastcampus.snsproject.repository.PostEntityRepository;
 import com.fastcampus.snsproject.repository.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +18,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
     private final PostEntityRepository postEntityRepository;
     private final UserEntityRepository userEntityRepository;
-    //private final CommentEntityRepository commentEntityRepository;
-    //private final LikeEntityRepository likeEntityRepository;
-    //private final AlarmProducer alarmProducer;
+    private final CommentEntityRepository commentEntityRepository;
+    private final LikeEntityRepository likeEntityRepository;
+    private final AlarmProducer alarmProducer;
 
     @Transactional
     public void create(String title, String body, String userName) {
@@ -80,9 +87,6 @@ public class PostService {
 
         return postEntityRepository.findAllByUser(userEntity, pageable).map(Post::fromEntity);
     }
-/*
-
-    // entity mapping
 
 
     @Transactional
@@ -125,6 +129,6 @@ public class PostService {
         List<LikeEntity> likes = likeEntityRepository.findAllByPost(postEntity);
         return likes.size();
     }
-*/
+
 
 }
