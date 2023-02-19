@@ -1,7 +1,9 @@
 package com.fastcampus.snsproject.controller;
 
+import com.fastcampus.snsproject.controller.request.PostCommentRequest;
 import com.fastcampus.snsproject.controller.request.PostCreateRequest;
 import com.fastcampus.snsproject.controller.request.PostModifyRequest;
+import com.fastcampus.snsproject.controller.response.CommentResponse;
 import com.fastcampus.snsproject.controller.response.PostResponse;
 import com.fastcampus.snsproject.controller.response.Response;
 import com.fastcampus.snsproject.model.Post;
@@ -45,6 +47,28 @@ public class PostController {
     @GetMapping("/my")
     public Response<Page<PostResponse>> myList(Pageable pageable, Authentication authentication) {
         return Response.success(postService.myList(authentication.getName(), pageable).map(PostResponse::fromPost));
+    }
+
+    @PostMapping("/{postId}/likes")
+    public Response<Void> like(@PathVariable Integer postId, Authentication authentication) {
+        postService.like(postId, authentication.getName());
+        return Response.success();
+    }
+
+    @GetMapping("/{postId}/likes")
+    public Response<Long> likeCount(@PathVariable Integer postId, Authentication authentication) {
+        return Response.success(postService.likeCount(postId));
+    }
+
+    @PostMapping("/{postId}/comments")
+    public Response<Void> comment(@PathVariable Integer postId, @RequestBody PostCommentRequest request, Authentication authentication) {
+        postService.comment(postId, authentication.getName(), request.getComment());
+        return Response.success();
+    }
+
+    @GetMapping("/{postId}/comments")
+    public Response<Page<CommentResponse>> getComments(@PathVariable Integer postId, Pageable pageable, Authentication authentication) {
+        return Response.success(postService.getComments(postId, pageable).map(CommentResponse::fromComment));
     }
 
 }

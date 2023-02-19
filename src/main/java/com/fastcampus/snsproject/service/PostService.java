@@ -2,16 +2,19 @@ package com.fastcampus.snsproject.service;
 
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
+import com.fastcampus.snsproject.model.AlarmArgs;
+import com.fastcampus.snsproject.model.AlarmType;
+import com.fastcampus.snsproject.model.Comment;
 import com.fastcampus.snsproject.model.Post;
-import com.fastcampus.snsproject.model.entity.PostEntity;
-import com.fastcampus.snsproject.model.entity.UserEntity;
-import com.fastcampus.snsproject.repository.PostEntityRepository;
-import com.fastcampus.snsproject.repository.UserEntityRepository;
+import com.fastcampus.snsproject.model.entity.*;
+import com.fastcampus.snsproject.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,9 @@ public class PostService {
 
     private final PostEntityRepository postEntityRepository;
     private final UserEntityRepository userEntityRepository;
+    private final LikeEntityRepository likeEntityRepository;
+    private final CommentEntityRepository commentEntityRepository;
+    private final AlarmEntityRepository alarmEntityRepository;
 
     @Transactional
     public void create(String title, String body, String userName) {
@@ -53,7 +59,8 @@ public class PostService {
         if (postEntity.getUser() != userEntity) {
             throw new SnsApplicationException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission with %s", userName, postId));
         }
-
+        likeEntityRepository.deleteAllByPost(postEntity);
+        commentEntityRepository.deleteAllByPost(postEntity);
         postEntityRepository.delete(postEntity);
     }
 
@@ -64,6 +71,54 @@ public class PostService {
     public Page<Post> myList(String userName, Pageable pageable) {
         UserEntity userEntity = getUserEntityOrException(userName);
         return postEntityRepository.findAllByUser(userEntity, pageable).map(Post::fromEntity);
+    }
+
+    @Transactional
+    public void like(Integer postId, String userName) {
+        // post like user
+        UserEntity postLikeUser = getUserEntityOrException(userName);
+        // target post
+        PostEntity targetPost = getPostEntityOrException(postId);
+
+        // check  like -> throw
+        likeEntityRepository.findByUserAndPost(postLikeUser, targetPost).ifPresent(it -> {
+            throw new SnsApplicationException(ErrorCode.ALREADY_LIKED, String.format("userName %s already liked post %d", userName, postId));
+        });
+
+        // like save
+        likeEntityRepository.save(LikeEntity.of(postLikeUser, targetPost));
+        // alarm save
+        AlarmArgs alarmArgs = new AlarmArgs(postLikeUser.getId(), targetPost.getId());
+        alarmEntityRepository.save(AlarmEntity.of(targetPost.getUser(), AlarmType.NEW_LIKE_ON_POST, alarmArgs));
+    }
+
+    @Transactional
+    public long likeCount(Integer postId) {
+        PostEntity postEntity = getPostEntityOrException(postId);
+
+        // count Like
+        // List<LikeEntity> likeEntities = likeEntityRepository.findAllByPost(postEntity);
+        // return likeEntities.size();
+        return likeEntityRepository.countByPost(postEntity);
+    }
+
+    @Transactional
+    public void comment(Integer postId, String userName, String comment) {
+        // comment writer
+        UserEntity commentWriter = getUserEntityOrException(userName);
+        // target post
+        PostEntity targetPost = getPostEntityOrException(postId);
+
+        // comment save
+        commentEntityRepository.save(CommentEntity.of(commentWriter, targetPost, comment));
+        // alarm save to post writer
+        AlarmArgs alarmArgs = new AlarmArgs(commentWriter.getId(), targetPost.getId());
+        alarmEntityRepository.save(AlarmEntity.of(targetPost.getUser(), AlarmType.NEW_COMMENT_ON_POST, alarmArgs));
+    }
+
+    public Page<Comment> getComments(Integer postId, Pageable pageable) {
+        PostEntity postEntity = getPostEntityOrException(postId);
+        return commentEntityRepository.findAllByPost(postEntity, pageable).map(Comment::fromEntity);
     }
 
     private UserEntity getUserEntityOrException(String userName) {
