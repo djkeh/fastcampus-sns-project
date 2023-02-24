@@ -9,6 +9,7 @@ import com.fastcampus.snsproject.repository.AlarmEntityRepository;
 import com.fastcampus.snsproject.repository.UserCacheRepository;
 import com.fastcampus.snsproject.repository.UserEntityRepository;
 import com.fastcampus.snsproject.util.JwtTokenUtils;
+import com.fastcampus.snsproject.util.UnoStringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -36,9 +37,11 @@ public class UserService {
 
 
     public User loadUserByUserName(String userName) {
-        return userCacheRepository.getUser(userName).orElseGet(() ->
-                userEntityRepository.findByUserName(userName).map(User::fromEntity).orElseThrow(() ->
-                        new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)))
+        String modifiedName = UnoStringUtils.replaceBlankSpaces(userName, "-");
+
+        return userCacheRepository.getUser(modifiedName).orElseGet(() ->
+                userEntityRepository.findByUserName(modifiedName).map(User::fromEntity).orElseThrow(() ->
+                        new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", modifiedName)))
         );
     }
 

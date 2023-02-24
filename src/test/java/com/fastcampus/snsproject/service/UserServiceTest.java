@@ -3,6 +3,7 @@ package com.fastcampus.snsproject.service;
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
 import com.fastcampus.snsproject.fixture.UserEntityFixture;
+import com.fastcampus.snsproject.model.User;
 import com.fastcampus.snsproject.model.entity.UserEntity;
 import com.fastcampus.snsproject.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -29,6 +31,22 @@ public class UserServiceTest {
     @MockBean
     private BCryptPasswordEncoder encoder;
 
+    @MockBean
+    private StringService stringService;
+
+
+    @Test
+    void 회원이름이_주어지면_캐시를_조회하고_DB를_조회해서_유저정보를_돌려준다() {
+        // Given
+        when(stringService.replaceBlankSpaces(eq("user name"), any())).thenReturn("username");
+        when(userEntityRepository.findByUserName("username")).thenReturn(Optional.of(UserEntity.of("username", "몰라")));
+
+        // When
+        User user = userService.loadUserByUserName("user name");
+
+        // Then
+        System.out.println(user);
+    }
 
     @Test
     void 회원가입이_정상적으로_동작하는_경우() {
