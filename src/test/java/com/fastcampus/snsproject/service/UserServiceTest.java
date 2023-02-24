@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
@@ -31,15 +32,15 @@ public class UserServiceTest {
     @MockBean
     private BCryptPasswordEncoder encoder;
 
-    @MockBean
+    @SpyBean(name = "markStringService")
     private StringService stringService;
 
 
     @Test
     void 회원이름이_주어지면_캐시를_조회하고_DB를_조회해서_유저정보를_돌려준다() {
         // Given
-        when(stringService.replaceBlankSpaces(eq("user name"), any())).thenReturn("username");
-        when(userEntityRepository.findByUserName("username")).thenReturn(Optional.of(UserEntity.of("username", "몰라")));
+//        when(stringService.replaceBlankSpaces(eq("user name"), any())).thenReturn("username");
+        when(userEntityRepository.findByUserName("MARK")).thenReturn(Optional.of(UserEntity.of("username", "몰라")));
 
         // When
         User user = userService.loadUserByUserName("user name");

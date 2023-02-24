@@ -11,6 +11,7 @@ import com.fastcampus.snsproject.repository.UserEntityRepository;
 import com.fastcampus.snsproject.util.JwtTokenUtils;
 import com.fastcampus.snsproject.util.UnoStringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserEntityRepository userEntityRepository;
@@ -36,6 +36,19 @@ public class UserService {
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimeMs;
 
+    public UserService(
+            UserEntityRepository userEntityRepository,
+            AlarmEntityRepository alarmEntityRepository,
+            BCryptPasswordEncoder encoder,
+            UserCacheRepository userCacheRepository,
+            @Qualifier("markStringService") StringService stringService
+    ) {
+        this.userEntityRepository = userEntityRepository;
+        this.alarmEntityRepository = alarmEntityRepository;
+        this.encoder = encoder;
+        this.userCacheRepository = userCacheRepository;
+        this.stringService = stringService;
+    }
 
     public User loadUserByUserName(String userName) {
         String modifiedName = stringService.replaceBlankSpaces(userName, "-");
