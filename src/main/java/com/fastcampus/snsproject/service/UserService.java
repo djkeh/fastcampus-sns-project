@@ -28,6 +28,7 @@ public class UserService {
     private final AlarmEntityRepository alarmEntityRepository;
     private final BCryptPasswordEncoder encoder;
     private final UserCacheRepository userCacheRepository;
+    private final StringService stringService;
 
     @Value("${jwt.secret-key}")
     private String secretKey;
@@ -37,7 +38,7 @@ public class UserService {
 
 
     public User loadUserByUserName(String userName) {
-        String modifiedName = UnoStringUtils.replaceBlankSpaces(userName, "-");
+        String modifiedName = stringService.replaceBlankSpaces(userName, "-");
 
         return userCacheRepository.getUser(modifiedName).orElseGet(() ->
                 userEntityRepository.findByUserName(modifiedName).map(User::fromEntity).orElseThrow(() ->
