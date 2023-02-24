@@ -3,8 +3,10 @@ package com.fastcampus.snsproject.service;
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
 import com.fastcampus.snsproject.fixture.UserEntityFixture;
+import com.fastcampus.snsproject.model.User;
 import com.fastcampus.snsproject.model.entity.UserEntity;
 import com.fastcampus.snsproject.repository.UserEntityRepository;
+import com.fastcampus.snsproject.util.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,22 @@ public class UserServiceTest {
     private UserEntityRepository userEntityRepository;
 
     @MockBean
+    private UnoStringService unoStringService;
+
+    @MockBean
     private BCryptPasswordEncoder encoder;
+
+
+    @Test
+    void 없는_유저이름을_전달하면_예외를_던진다() {
+        // Given
+        String input = "uno";
+        when(unoStringService.uppercase(input)).thenReturn("ASDF");
+        when(userEntityRepository.findByUserName(input)).thenReturn(Optional.empty());
+
+        // When & Then
+        Assertions.assertThrows(SnsApplicationException.class, () -> userService.loadUserByUserName(input));
+    }
 
 
     @Test

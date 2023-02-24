@@ -27,6 +27,7 @@ public class UserService {
     private final AlarmEntityRepository alarmEntityRepository;
     private final BCryptPasswordEncoder encoder;
     private final UserCacheRepository userCacheRepository;
+    private final StringService stringService;
 
     @Value("${jwt.secret-key}")
     private String secretKey;
@@ -36,9 +37,11 @@ public class UserService {
 
 
     public User loadUserByUserName(String userName) {
-        return userCacheRepository.getUser(userName).orElseGet(() ->
-                userEntityRepository.findByUserName(userName).map(User::fromEntity).orElseThrow(() ->
-                        new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", userName)))
+        String modifiedUsername = stringService.uppercase(userName);
+
+        return userCacheRepository.getUser(modifiedUsername).orElseGet(() ->
+                userEntityRepository.findByUserName(modifiedUsername).map(User::fromEntity).orElseThrow(() ->
+                        new SnsApplicationException(ErrorCode.USER_NOT_FOUND, String.format("%s not founded", modifiedUsername)))
         );
     }
 
