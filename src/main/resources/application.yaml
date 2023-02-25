@@ -17,6 +17,10 @@ jwt:
 
 spring.redis.url: redis://localhost:6379
 
+xxx:
+  db:
+    tableName: post_management
+
 ---
 
 spring:

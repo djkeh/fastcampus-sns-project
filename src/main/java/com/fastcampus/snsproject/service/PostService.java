@@ -7,13 +7,17 @@ import com.fastcampus.snsproject.model.AlarmType;
 import com.fastcampus.snsproject.model.Comment;
 import com.fastcampus.snsproject.model.Post;
 import com.fastcampus.snsproject.model.entity.*;
+import com.fastcampus.snsproject.properties.XXXDbTable;
 import com.fastcampus.snsproject.repository.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -24,9 +28,12 @@ public class PostService {
     private final CommentEntityRepository commentEntityRepository;
     private final AlarmEntityRepository alarmEntityRepository;
     private final AlarmService alarmService;
+    private final XXXDbTable table;
 
     @Transactional
     public void create(String title, String body, String userName) {
+        log.warn("연습 - " + table.tableName());
+
         UserEntity userEntity = getUserEntityOrException(userName);
         postEntityRepository.save(PostEntity.of(title, body, userEntity));
     }
