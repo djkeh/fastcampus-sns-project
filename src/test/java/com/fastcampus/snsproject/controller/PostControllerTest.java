@@ -8,11 +8,16 @@ import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
 import com.fastcampus.snsproject.fixture.PostEntityFixture;
 import com.fastcampus.snsproject.model.Post;
+import com.fastcampus.snsproject.model.User;
+import com.fastcampus.snsproject.model.entity.UserEntity;
 import com.fastcampus.snsproject.service.PostService;
+import com.fastcampus.snsproject.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
@@ -23,30 +28,44 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(PostController.class)
 public class PostControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+    private final MockMvc mockMvc;
+    private final ObjectMapper objectMapper;
+
+    @MockBean private PostService postService;
+    @MockBean private UserService userService;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    public PostControllerTest(
+            MockMvc mockMvc,
+            ObjectMapper objectMapper
+    ) {
+        this.mockMvc = mockMvc;
+        this.objectMapper = objectMapper;
+    }
 
-    @MockBean
-    private PostService postService;
+    @BeforeEach
+    void setUp() {
+        // 인증 설정 때문에 추가로 mocking이 필요하여 작성한 코드. AuthenticationConfig 을 참고
+        given(userService.loadUserByUserName(any())).willReturn(User.fromEntity(UserEntity.of("uno", "pw")));
+    }
 
     @Test
     @WithMockUser
     void 포스트작성() throws Exception {
         String title = "title";
         String body = "body";
+        willDoNothing().given(postService).create(any(), any(), any());
 
         mockMvc.perform(post("/api/v1/posts")
                         .contentType(MediaType.APPLICATION_JSON)
