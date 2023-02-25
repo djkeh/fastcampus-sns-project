@@ -6,10 +6,17 @@ import com.fastcampus.snsproject.fixture.PostEntityFixture;
 import com.fastcampus.snsproject.fixture.UserEntityFixture;
 import com.fastcampus.snsproject.model.entity.PostEntity;
 import com.fastcampus.snsproject.model.entity.UserEntity;
+import com.fastcampus.snsproject.properties.XXXDbTable;
 import com.fastcampus.snsproject.repository.PostEntityRepository;
 import com.fastcampus.snsproject.repository.UserEntityRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -19,19 +26,31 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
 
-    @Autowired
-    private PostService postService;
+    @InjectMocks private PostService postService;
 
-    @MockBean
-    private PostEntityRepository postEntityRepository;
-    @MockBean
-    private UserEntityRepository userEntityRepository;
+    @Mock private PostEntityRepository postEntityRepository;
+    @Mock private UserEntityRepository userEntityRepository;
+    private XXXDbTable table;
+
+    @BeforeEach
+    void setUp() {
+        table = new XXXDbTable("test"); // mockito 는 불변객체(final) 특성을 띄는 record를 mocking하지 못함
+        postService = new PostService(
+                postEntityRepository,
+                userEntityRepository,
+                null,
+                null,
+                null,
+                null,
+                table
+        );
+    }
+
 
     @Test
     void 포스트작성이_성공한경우() {
@@ -39,9 +58,11 @@ public class PostServiceTest {
         String body = "body";
         String userName = "userName";
 
+
         // mocking
         when(userEntityRepository.findByUserName(userName)).thenReturn(Optional.of(mock(UserEntity.class)));
         when(postEntityRepository.save(any())).thenReturn(mock(PostEntity.class));
+        when(table.tableName()).thenReturn("test"); // mockito 는 불변객체(final) 특성을 띄는 record를 mocking하지 못함
 
         Assertions.assertDoesNotThrow(() -> postService.create(title, body, userName));
 
